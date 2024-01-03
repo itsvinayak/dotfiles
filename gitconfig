@@ -1,0 +1,25 @@
+[user]
+	email = itssvinayak@gmail.com
+	name = vinayak
+	username = itsvinayak
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+[credential]
+	helper = store
+[fetch]
+	prune = true
+
+[alias]
+	ac = commit -am
+	st = status
+	br = branch
+	co = checkout
+	cm = commit -m
+	p = push
+	pl = pull
+	f = fetch
+	l = log --oneline --graph --decorate --all --pretty=format:\"%C(yellow)%h%Creset %C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\"
+
+
