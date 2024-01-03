@@ -95,7 +95,44 @@ fi
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# functions
+
+ function killByPort {
+        local port=$1
+        echo "killing port ${port}"
+        lsof -i tcp:${port} | awk 'FNR == 2{print $2}' | xargs kill -9
+        echo "done . . . "
+}
+
+function disk_space {
+    local partition=$1
+    local disk_space=$(df -h $partition | awk 'NR==2 {print $4}')
+    echo "Available disk space on $partition: $disk_space"
+}
+
+function clean_old_files {
+    local directory=$1
+    local days_old=$2
+
+    find "$directory" -type f -mtime +$days_old -exec rm {} \;
+    echo "Old files deleted."
+}
+
+function search_and_replace {
+    local search_string="$1"
+    local replace_string="$2"
+    local directory="$3"
+    
+    grep -rl "$search_string" "$directory" | xargs sed -i "s/$search_string/$replace_string/g"
+    echo "String '$search_string' replaced with '$replace_string' in files under '$directory'."
+}
+
+# aliases
 alias reload="source ~/.zshrc"
 alias c="clear"
 alias e="exit"
@@ -106,6 +143,5 @@ alias mkdir="mkdir -pv"
 alias google="surf www.google.com"
 alias say="fortune | xcowsay"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias open_repo="git remote get-url origin | xargs open"
+alias kill_all_tmux="tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill"

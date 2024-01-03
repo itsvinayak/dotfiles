@@ -18,7 +18,7 @@ function install_mac_tools() {
     echo "Installing tools for Mac"
     install_brew
     brew update
-    brew install git curl wget nvim> unzip zsh alacritty tmux python node npm openjdk@8 openjdk@17 ranger
+    brew install git curl wget nvim unzip zsh alacritty tmux python node npm openjdk@8 openjdk@17 ranger
 }
 
 function install_brew() {
@@ -50,6 +50,14 @@ function install_packer() {
     fi
 }
 
+function install_tpm() {
+    echo "Installing TPM"
+    if [ ! -d ~/.tmux/plugins/tpm ]; then
+        echo "Installing tpm"
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+}
+
 start=`date +%s.%N`
 
 if [ "$machine" == "Linux" ]; then
@@ -67,11 +75,17 @@ install_oh_my_zsh
 # Install tldr
 install_tldr
 
+# Install vim packer
+install_packer
+
+
+# install tpm for tmux
+install_tpm
+
+
 # Install nerd fonts
 bash installFont.sh
 
-# Install vim packer
-install_packer
 
 end=`date +%s.%N`
 
