@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Check if OS is Linux or Mac
 unameOut="$(uname -s)"
@@ -81,10 +81,6 @@ install_packer
 
 # install tpm for tmux
 install_tpm
-
-
-# Install nerd fonts
-bash installFont.sh
 
 
 end=`date +%s.%N`

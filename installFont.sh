@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Select the Nerd Font from https://www.nerdfonts.com/font-downloads
 # and install it.
 
