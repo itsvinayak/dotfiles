@@ -36,6 +36,7 @@ function install_linux_fonts() {
                 echo "unzip the $font_name.zip"
                 unzip "$font_name.zip" -d "$HOME/.fonts/$font_name/"
                 fc-cache -fv
+                rm -rf "$font_name.zip"
                 echo "done!"
                 break
 
@@ -47,6 +48,7 @@ function install_linux_fonts() {
                 echo "unzip the $font_name.zip"
                 unzip "$font_name.zip" -d "$HOME/.fonts/$font_name/"
                 fc-cache -fv
+                rm -rf "$font_name.zip"
                 echo "done!"
                 break
 
