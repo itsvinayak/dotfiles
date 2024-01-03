@@ -8,43 +8,72 @@ case "${unameOut}" in
     *)          machine="UNKNOWN:${unameOut}"
 esac
 
-function installing_linux_tools() {
+function install_linux_tools() {
     echo "Installing tools for Linux"
     sudo apt-get update
-    sudo apt-get install -y git curl wget nvim zsh tmux python3-pip nodejs npm openjdk-8-jdk openjdk-17-jdk
+    sudo apt-get install -y git curl unzip wget nvim zsh tmux python3-pip nodejs npm openjdk-8-jdk openjdk-17-jdk alacritty fortune surf xcowsay ranger
 }
 
-function installing_mac_tools() {
+function install_mac_tools() {
     echo "Installing tools for Mac"
-    installing_brew
+    install_brew
     brew update
-    brew install git curl wget nvim zsh tmux python node npm openjdk@8 openjdk@17
+    brew install git curl wget nvim> unzip zsh alacritty tmux python node npm openjdk@8 openjdk@17 ranger
 }
 
-function installing_brew() {
+function install_brew() {
     echo "Installing Brew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
-function installing_oh_my_zsh() {
+function install_tldr() {
+    echo "Installing tldr"
+    npm install -g tldr
+}
+
+function install_oh_my_zsh() {
     echo "Installing Oh My Zsh"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
-function installing_nvm() {
+function install_nvm() {
     echo "Installing NVM"
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 }
 
+
+function install_packer() {
+    echo "Installing Packer"
+    if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
+        echo "Installing packer"
+        git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    fi
+}
+
+start=`date +%s.%N`
+
 if [ "$machine" == "Linux" ]; then
-    installing_linux_tools
+    install_linux_tools
     echo "Linux"
 elif [ "$machine" == "Mac" ]; then
-    installing_mac_tools
+    install_mac_tools
     echo "Mac"
 fi
 
 # Common steps for both Linux and Mac
-installing_nvm
-installing_oh_my_zsh
+install_nvm
+install_oh_my_zsh
 
+# Install tldr
+install_tldr
+
+# Install nerd fonts
+bash installFont.sh
+
+# Install vim packer
+install_packer
+
+end=`date +%s.%N`
+
+runtime=$( echo "$end - $start" | bc -l )
+echo "Runtime was $runtime seconds"
