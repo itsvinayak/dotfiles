@@ -25,7 +25,7 @@ cp zshrc ~/.zshrc
 # config tmux
 echo "Config tmux"
 backup_and_move_folder "~/.config/tmux"
-rm -rf ~/tmux
+rm -rf ~/.tmux ~/.tmux.conf
 cp -r ./tmux ~/.config
 
 # config nvim
