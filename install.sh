@@ -30,8 +30,7 @@ cp -r ./tmux ~/.config
 # config nvim
 echo "Config nvim"
 backup_and_move_folder "~/.config/nvim"
-mkdir -p ~/.config/nvim/
-cp -r ./nvim-config/* ~/.config/nvim/
+cp -r ./nvim ~/.config
 
 # config git
 echo "Config git"
