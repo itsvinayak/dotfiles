@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Function to create backup and move folder
+backup_and_move_folder() {
+    local folder_path=$1
+    if [ -d "$folder_path" ]; then
+        echo "$folder_path folder exists"
+        echo "Backing up $folder_path to ${folder_path}_old"
+        mv "$folder_path" "${folder_path}_old"
+    fi
+}
 
 # installing tools for OS
 echo "Installing tools for OS"
@@ -9,35 +18,20 @@ bash installTools.sh
 echo "Installing fonts"
 bash installFont.sh
 
-
 # config zshrc
-
 echo "Config zshrc"
 cp zshrc ~/.zshrc
 
 # config tmux
 echo "Config tmux"
-if [ ! -d ~/.config/tmux ]; then
-    mkdir -p ~/.config/tmux
-else
-    echo "tmux folder exists"
-    echo "removing tmux folder and create new one"
-    mv ~/.config/tmux ~/.config/tmux_old
-    mkdir -p ~/.config/tmux
-fi
-cp tmux.conf ~/.config/tmux/.tmux.conf
+backup_and_move_folder "~/.config/tmux"
+cp -r ./tmux ~/.config
 
 # config nvim
 echo "Config nvim"
-if [ ! -d ~/.config/nvim ]; then
-    mkdir -p ~/.config/nvim
-else
-    echo "nvim folder exists"
-    echo "removing nvim folder and create new one"
-    mv ~/.config/nvim ~/.config/nvim_old
-    mkdir -p ~/.config/nvim
-fi
-cp -r nvim-config/* ~/.config/nvim/
+backup_and_move_folder "~/.config/nvim"
+mkdir -p ~/.config/nvim/
+cp -r ./nvim-config/* ~/.config/nvim/
 
 # config git
 echo "Config git"
@@ -45,27 +39,12 @@ cp gitconfig ~/.gitconfig
 
 # config alacritty
 echo "Config alacritty"
-if [ ! -d ~/.config/alacritty ]; then
-    mkdir -p ~/.config/alacritty
-else
-    echo "alacritty folder exists"
-    echo "removing alacritty folder and create new one"
-    mv ~/.config/alacritty ~/.config/alacritty_old
-    mkdir -p ~/.config/alacritty
-fi
-cp alacritty.yml ~/.config/alacritty/alacritty.yml
+backup_and_move_folder "~/.config/alacritty"
+cp -r ./alacritty ~/.config
 
 # config ranger
 echo "Config ranger"
-if [ ! -d ~/.config/ranger ]; then
-    mkdir -p ~/.config/ranger
-else
-    echo "ranger folder exists"
-    echo "removing ranger folder and create new one"
-    mv ~/.config/ranger ~/.config/ranger_old
-    mkdir -p ~/.config/ranger
-fi
-cp -r ranger/* ~/.config/ranger/
+backup_and_move_folder "~/.config/ranger"
+cp -r ./ranger ~/.config
 
-
-source ~/.zshrc
+echo "Configuration setup complete."
