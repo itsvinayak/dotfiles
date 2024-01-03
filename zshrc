@@ -132,6 +132,20 @@ function search_and_replace {
     echo "String '$search_string' replaced with '$replace_string' in files under '$directory'."
 }
 
+function create_dir_and_go {
+    local directory="$1"
+    mkdir -p "$directory" && cd "$directory"
+}
+
+function auto_commit {
+    local folder_path=$(pwd)
+    local current_datetime=$(date +"%Y-%m-%d %H:%M:%S")
+    git add .
+    git commit -m "Auto commit on $current_datetime"
+    git push --all
+    echo "Changes committed successfully."
+}
+
 # aliases
 alias reload="source ~/.zshrc"
 alias c="clear"
