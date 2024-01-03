@@ -13,8 +13,6 @@ case "${unameOut}" in
     *)          machine="UNKNOWN:${unameOut}"
 esac
 
-
-
 ## linux nerd font
 
 function install_linux_fonts() {
@@ -24,9 +22,7 @@ function install_linux_fonts() {
     for font_name in fonts_list; do
         echo "Starting download $font_name Nerd Font"
 
-        if [ -n "$font_name" ]; then
-
-            echo "Starting download $font_name nerd font"
+        if [ ! -d "$HOME/.fonts/$font_name" ]; then
 
             if [ "$(command -v curl)" ]; then
                 echo "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_name.zip"
@@ -59,8 +55,9 @@ function install_linux_fonts() {
 
             fi
 
-        
-
+        else
+            echo "$font_name exists."
+            continue
         fi
     done
 }
