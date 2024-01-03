@@ -66,3 +66,6 @@ else
     mkdir -p ~/.config/ranger
 fi
 cp -r ranger/* ~/.config/ranger/
+
+
+source ~/.zshrc
