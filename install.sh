@@ -41,13 +41,13 @@ cp zshrc ~/.zshrc
 
 # config tmux
 echo "Config tmux"
-backup_and_move_folder "~/.config/tmux"
+backup_and_move_folder ~/.config/tmux
 rm -rf ~/.tmux ~/.tmux.conf
 cp -r ./tmux ~/.config
 
 # config nvim
 echo "Config nvim"
-backup_and_move_folder "~/.config/nvim"
+backup_and_move_folder ~/.config/nvim
 cp -r ./nvim ~/.config
 
 # config git
@@ -56,12 +56,12 @@ cp gitconfig ~/.gitconfig
 
 # config alacritty
 echo "Config alacritty"
-backup_and_move_folder "~/.config/alacritty"
+backup_and_move_folder ~/.config/alacritty
 cp -r ./alacritty ~/.config
 
 # config ranger
 echo "Config ranger"
-backup_and_move_folder "~/.config/ranger"
+backup_and_move_folder ~/.config/ranger
 cp -r ./ranger ~/.config
 
 echo "Configuration setup complete."
