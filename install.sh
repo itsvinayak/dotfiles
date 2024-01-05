@@ -5,8 +5,8 @@ backup_and_move_folder() {
     local folder_path=$1
     if [ -d "$folder_path" ]; then
         echo "$folder_path folder exists"
-        echo "Backing up $folder_path to ${folder_path}_old"
-        mv "$folder_path" "${folder_path}_old"
+        echo "Backing up $folder_path to ${folder_path}_bak"
+        mv "$folder_path" "${folder_path}_bak"
     fi
 }
 
