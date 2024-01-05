@@ -10,13 +10,30 @@ backup_and_move_folder() {
     fi
 }
 
-# installing tools for OS
-echo "Installing tools for OS"
-bash installTools.sh
+echo -e '\033[2J\033[u'
 
-# installing fonts
-echo "Installing fonts"
-bash installFont.sh
+# prompt for if tools and fonts are installed
+echo "Have you installed tools ? (y/n)"
+read -r tools_installed
+
+if [ "${tools_installed:l}" = "y" ]; then
+    bash installTools.sh
+    echo "Please restart your terminal to apply tool changes"
+else
+    echo "Skipping tools installation"    
+fi
+
+echo "Have you installed fonts ? (y/n)"
+read -r fonts_installed
+
+if [ "${fonts_installed:l}" = "y" ] ;then
+    bash installFont.sh
+    echo "Please restart your terminal to apply font changes"
+else
+    echo "Skipping fonts installation"    
+fi
+
+echo "installing config files ..."
 
 # config zshrc
 echo "Config zshrc"
