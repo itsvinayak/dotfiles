@@ -181,6 +181,10 @@ function add_link {
     fi
 }
 
+function ram_clean {
+    su -c "echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'" root
+}
+
 # aliases
 alias reload="source ~/.zshrc"
 alias c="clear"
@@ -195,3 +199,6 @@ alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 
 alias open_repo="git remote get-url origin | xargs open"
 alias kill_all_tmux="tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill"
+alias ram_usage="ps aux | awk '{print \$4 "\t" \$11}' | sort | uniq -c | sort -nr | head -n 10"
+
+
