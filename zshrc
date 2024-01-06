@@ -127,7 +127,7 @@ function search_and_replace {
     local search_string="$1"
     local replace_string="$2"
     local directory="$3"
-    
+
     grep -rl "$search_string" "$directory" | xargs sed -i "s/$search_string/$replace_string/g"
     echo "String '$search_string' replaced with '$replace_string' in files under '$directory'."
 }
@@ -145,7 +145,7 @@ auto_commit() {
     local current_path=$(pwd)
     local current_datetime=$(date +"%Y-%m-%d %H:%M:%S")
     local git_commit_message=${2} # optional argument
-    
+
     # Check if the folder path exists
     if [ ! -d "$folder_path" ]; then
         echo "Folder path '$folder_path' does not exist."
@@ -195,7 +195,7 @@ alias rm="rm -fvr"
 alias mkdir="mkdir -pv"
 alias say="fortune | xcowsay"
 alias note="nvim ~/DevNotesAndCode/notes.md && auto_commit ~/DevNotesAndCode"
-alias tmux="tmux -f ~/.config/tmux/tmux.conf"
+alias tmux="tmux -f ~/.config/tmux/.tmux.conf"
 
 alias open_repo="git remote get-url origin | xargs open"
 alias kill_all_tmux="tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill"
