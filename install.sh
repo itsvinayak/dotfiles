@@ -6,6 +6,9 @@ backup_and_move_folder() {
     if [ -d "$folder_path" ]; then
         echo "$folder_path folder exists"
         echo "Backing up $folder_path to ${folder_path}_bak"
+        if [ -d "${folder_path}_bak" ]; then
+            rm -rf "${folder_path}_bak"
+        fi
         mv "$folder_path" "${folder_path}_bak"
     fi
 }
@@ -20,17 +23,17 @@ if [ "${tools_installed:l}" = "y" ]; then
     bash installTools.sh
     echo "Please restart your terminal to apply tool changes"
 else
-    echo "Skipping tools installation"    
+    echo "Skipping tools installation"
 fi
 
 echo "Have you installed fonts ? (y/n)"
 read -r fonts_installed
 
-if [ "${fonts_installed:l}" = "y" ] ;then
+if [ "${fonts_installed:l}" = "y" ]; then
     bash installFont.sh
     echo "Please restart your terminal to apply font changes"
 else
-    echo "Skipping fonts installation"    
+    echo "Skipping fonts installation"
 fi
 
 echo "installing config files ..."
@@ -63,5 +66,11 @@ cp -r ./alacritty ~/.config
 echo "Config ranger"
 backup_and_move_folder ~/.config/ranger
 cp -r ./ranger ~/.config
+
+echo "setting up Notes folder"
+if [ ! -d ~/DevNotesAndCode ]; then
+    git clone https://github.com/itsvinayak/DevNotesAndCode.git ~/DevNotesAndCode
+fi
+echo "Notes folder setup complete."
 
 echo "Configuration setup complete."

@@ -137,12 +137,35 @@ function create_dir_and_go {
     mkdir -p "$directory" && cd "$directory"
 }
 
-function auto_commit {
-    local folder_path=$(pwd)
+
+auto_commit() {
+    ## Function to auto commit changes to git,
+    ## takes folder path as an argument, if no argument is passed,
+    local folder_path=${1:-$(pwd)}
+    local current_path=$(pwd)
     local current_datetime=$(date +"%Y-%m-%d %H:%M:%S")
+    local git_commit_message=${2} # optional argument
+    
+    # Check if the folder path exists
+    if [ ! -d "$folder_path" ]; then
+        echo "Folder path '$folder_path' does not exist."
+        return 1
+    fi
+
+    if [ folder_path != current_path ]; then
+        echo "Changing directory to '$folder_path'"
+        cd "$folder_path" || return 1
+    fi
+    # Change to the specified folder path
     git add .
-    git commit -m "Auto commit on $current_datetime"
+    git commit -m "Auto commit on $current_datetime : $git_commit_message"
     git push --all
+
+    if [ folder_path != current_path ]; then
+        echo "Changing directory back to '$current_path'"
+        cd "$current_path" || return 1
+    fi
+
     echo "Changes committed successfully."
 }
 
@@ -154,8 +177,9 @@ alias pip="pip3"
 alias python="python3"
 alias rm="rm -fvr"
 alias mkdir="mkdir -pv"
-alias google="surf www.google.com"
 alias say="fortune | xcowsay"
+alias note="nvim ~/DevNotesAndCode/notes.md && auto_commit ~/DevNotesAndCode"
+alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 
 alias open_repo="git remote get-url origin | xargs open"
 alias kill_all_tmux="tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill"
