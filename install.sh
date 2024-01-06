@@ -70,6 +70,12 @@ cp -r ./ranger ~/.config
 echo "setting up Notes folder"
 if [ ! -d ~/DevNotesAndCode ]; then
     git clone https://github.com/itsvinayak/DevNotesAndCode.git ~/DevNotesAndCode
+else
+    echo "Notes folder already exists"
+    echo "Updating Notes folder"
+    cd ~/DevNotesAndCode || exit
+    git pull
+    cd - || exit
 fi
 echo "Notes folder setup complete."
 
