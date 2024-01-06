@@ -169,6 +169,18 @@ auto_commit() {
     echo "Changes committed successfully."
 }
 
+
+function add_link {
+    local text="$1"
+    local link="$2"
+    local file=~/DevNotesAndCode/link.md
+    if [ -f "$file" ]; then
+        echo "[$text]($link)" >> "$file"
+    else
+        echo "File $file does not exist"
+    fi
+}
+
 # aliases
 alias reload="source ~/.zshrc"
 alias c="clear"
