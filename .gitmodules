@@ -1,0 +1,9 @@
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/itsvinayak/TurboNvimConfig.nvim
+[submodule "plugins"]
+	path = tmux/plugins
+	url = https://github.com/tmux-plugins/tpm
+[submodule "themes"]
+	path = alacritty/themes
+	url = https://github.com/alacritty/alacritty-theme.git

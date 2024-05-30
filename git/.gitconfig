@@ -1,0 +1,70 @@
+[user]
+	email = itssvinayak@gmail.com
+	name = vinayak
+	username = itsvinayak
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nvim
+	autocrlf = input
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	compression = 1
+	deltaBaseCacheLimit = 2g
+	packedGitWindowSize = 16m
+	packedGitLimit = 128m
+
+[pack]
+	deltaCacheSize = 2g
+	packSizeLimit = 2g
+	threads = 4
+
+[credential]
+	helper = store
+
+[fetch]
+	prune = true
+
+[color]
+	ui = true
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+
+[alias]
+	ac = commit -am
+	st = status
+	br = branch
+	co = checkout
+	cm = commit -m
+	p = push
+	pl = pull
+	f = fetch
+	lg = log --oneline --graph --decorate --all
+	unstage = reset HEAD --
+	last = log -1 HEAD
+
+[merge]
+	tool = nvimdiff
+	conflictstyle = diff3
+	keepBackup = false
+
+[diff]
+	tool = nvimdiff
+
+[rerere]
+	enabled = true
+
+[rebase]
+	autoSquash = true
+
+[status]
+	showUntrackedFiles = all
+
+[push]
+	default = simple
+
+[gc]
+	auto = 7
