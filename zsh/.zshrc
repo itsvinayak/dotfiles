@@ -6,7 +6,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZDOTDIR="$HOME/.config/zsh"
-export ZSH=$HOME/.config/zsh/.oh-my-zsh
+export ZSH="$ZDOTDIR/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -263,7 +263,7 @@ alias ld="lazydocker"
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 
 # -- the fuck : https://github.com/nvbn/thefuck
