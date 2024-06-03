@@ -6,7 +6,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZDOTDIR="$HOME/.config/zsh"
-export ZSH="$ZDOTDIR/.oh-my-zsh"
+export ZSH=$HOME/.config/zsh/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -14,7 +14,6 @@ export ZSH="$ZDOTDIR/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -247,7 +246,9 @@ alias mkdir="mkdir -pv"
 alias say="fortune | xcowsay"
 alias note="nvim ~/DevNotesAndCode/notes.md && auto_commit ~/DevNotesAndCode"
 alias fzfbat="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-alias git_open="git remote get-url origin | xargs open"
+alias fzftree="tzfgrep="rgrep -r . | fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+alias openree -afR | fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+alias f_repo="git remote get-url origin | xargs open"
 alias kill_all_tmux="tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill"
 alias tmux="tmux -f ~/.config/tmux/.tmux.conf a -t default || tmux -f ~/.config/tmux/.tmux.conf new -s default"
 alias show_ports="sudo lsof -i -P -n | grep LISTEN"
@@ -262,7 +263,7 @@ alias ld="lazydocker"
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 # -- the fuck : https://github.com/nvbn/thefuck
