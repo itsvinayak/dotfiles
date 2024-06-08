@@ -54,9 +54,6 @@
 [diff]
 	tool = nvimdiff
 
-[rerere]
-	enabled = true
-
 [rebase]
 	autoSquash = true
 
