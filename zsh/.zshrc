@@ -265,5 +265,6 @@ alias ld="lazydocker"
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 
-# -- the fuck : https://github.com/nvbn/thefuck
+# -- the fuck : https://github.com/nvbn/thefuck - pip install https://github.com/nvbn/thefuck/archive/master.zip
+
 eval $(thefuck --alias fuck)
